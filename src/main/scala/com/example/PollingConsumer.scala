@@ -38,3 +38,7 @@ class WorkConsumer(workItemsProvider: ActorRef) extends Actor {
       performWorkOn(workOnItem.workItem)
   }
 }
+
+case class AllocateWorkItems(numberOfItems: Int)
+case class WorkItemsAllocated(workItems: List[WorkItem])
+case class WorkItem(name: String)
