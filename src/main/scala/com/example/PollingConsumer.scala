@@ -3,6 +3,14 @@ package com.example
 import akka.actor._
 
 object PollingConsumerDriver extends CompletableApp(1) {
+  val workItemsProvider = system.actorOf(Props[WorkItemsProvider], "workItemsProvider")
+  val workConsumer = system.actorOf(Props(classOf[WorkConsumer], workItemsProvider), "workConsumer")
+
+  workConsumer ! WorkNeeded()
+
+  awaitCompletion
+
+  println("PollingConsumerDriver: completed.")
 }
 
 case class WorkNeeded()
