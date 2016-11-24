@@ -45,7 +45,7 @@ case class WorkItem(name: String)
 
 class WorkItemsProvider extends Actor {
   var workItemsNamed: Int = 0
-  
+
   def allocateWorkItems(numberOfItems: Int): List[WorkItem] = {
     var allocatedWorkItems = List[WorkItem]()
     for (itemCount <- 1 to numberOfItems) {
@@ -55,7 +55,7 @@ class WorkItemsProvider extends Actor {
     workItemsNamed = workItemsNamed + numberOfItems
     allocatedWorkItems
   }
-  
+
   def receive = {
     case request: AllocateWorkItems =>
       sender ! WorkItemsAllocated(allocateWorkItems(request.numberOfItems))
